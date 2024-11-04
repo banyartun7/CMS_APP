@@ -11,6 +11,7 @@
             @endif
             <form action="/category" method="POST">
                 @csrf
+                <a class="btn btn-warning text-white mb-3" href="/category">Back</a>
                 <div class="form-group">
                     <label class="mb-2">Name</label>
                     <input type="text" class="form-control mb-2" name="name" value="{{ old('name') }}"

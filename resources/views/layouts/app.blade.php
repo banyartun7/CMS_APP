@@ -81,32 +81,35 @@
 
         <main class="container mt-5">
             <div class="row">
-                <div class="col-md-4">
-                    <ul class="list-group">
-                        <li class="list-group-item bg-info text-white p-3">Control Panel</li>
-                        <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
-                                href="#">Dashboard</a></li>
-                        <li class="p-3 list-group-item"><a class="text-decoration-none link-info" href="#">My
-                                Profile</a></li>
-                        <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
-                                href="#">Posts</a>
-                        </li>
-                        <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
-                                href="/category">Category</a></li>
-                        <li class="p-3 list-group-item"><a class="text-decoration-none link-info" href="#">Tag</a>
-                        </li>
-                        <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
-                                href="#">User</a>
-                        </li>
-                        <li class="p-3 list-group-item">
-                            <form action="/logout" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-info text-white">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-8">
+                @if (Auth::check())
+                    <div class="col-md-3">
+                        <ul class="list-group">
+                            <li class="list-group-item bg-info text-white p-3">Control Panel</li>
+                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
+                                    href="#">Dashboard</a></li>
+                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info" href="#">My
+                                    Profile</a></li>
+                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
+                                    href="/post">Posts</a>
+                            </li>
+                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
+                                    href="/category">Category</a></li>
+                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
+                                    href="#">Tag</a>
+                            </li>
+                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
+                                    href="#">User</a>
+                            </li>
+                            <li class="p-3 list-group-item">
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-info text-white">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                @endif
+                <div class="col-md-9">
                     @yield('content')
                 </div>
             </div>

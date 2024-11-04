@@ -2,34 +2,38 @@
 
 @section('content')
     <div class="card">
-        <div class="card-header">Control</div>
+        <div class="card-header">Posts</div>
         <div class="card-body">
             @if (session('status'))
                 <div class="alert alert-success" role="alert">
                     {{ session('status') }}
                 </div>
             @endif
-            <a href="/category/create" class="btn btn-info text-white mb-3">Add new Category</a>
+            <a href="/post/create" class="btn btn-info text-white mb-3">Add new Post</a>
 
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Title</th>
+                        <th>Content</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categories as $category)
+                    @foreach ($posts as $post)
                         <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->name }}</td>
+                            <td>{{ $post->id }}</td>
+                            <td>{{ $post->title }}</td>
+                            <td>{{ Str::limit($post->content, 10) }}</td>
                             <td><a class="badge text-decoration-none text-bg-warning text-white"
-                                    href="category/{{ $category->id }}/edit">Update</a>
-                                <form action="{{ route('category.destroy', $category->id) }}" method="POST">
+                                    href="post/{{ $post->id }}/edit">Update</a>
+                                <a class="badge text-decoration-none text-bg-primary text-white"
+                                    href="post/{{ $post->id }}">View</a>
+                                <form action="{{ route('post.destroy', $post->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" onclick="return confirm('Are you sure to remove this category?')"
+                                    <button type="submit" onclick="return confirm('Are you sure to remove this post?')"
                                         class="badge text-bg-danger text-white" style="border-style:none;">DELETE</button>
                                 </form>
                         </tr>

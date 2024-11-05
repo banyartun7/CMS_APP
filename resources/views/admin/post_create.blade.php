@@ -22,8 +22,7 @@
                 </div>
                 <div class="form-group">
                     <label class="mb-2">Content</label>
-                    <input type="text" class="form-control mb-2" name="content" value="{{ old('content') }}"
-                        placeholder="Enter post description...">
+                    <textarea class="form-control mb-2" name="content" placeholder="Enter post description...">{{ old('content') }}</textarea>
                     @error('content')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

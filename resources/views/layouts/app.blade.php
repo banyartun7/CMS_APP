@@ -95,7 +95,7 @@
                             <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
                                     href="/category">Category</a></li>
                             <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
-                                    href="#">Tag</a>
+                                    href="/tag">Tag</a>
                             </li>
                             <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
                                     href="#">User</a>

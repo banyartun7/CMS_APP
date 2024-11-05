@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\categoryStoreRequest;
+use Illuminate\Support\Str;
 
 class CategroyController extends Controller
 {
@@ -35,7 +36,7 @@ class CategroyController extends Controller
      */
     public function store(categoryStoreRequest $request)
     {
-        Category::create($request->validated());
+        Category::create($request->validated() + ['slug' => Str::slug(request()->name)]);
         return redirect('/category')->with('status',config('alert.category.create'));
     }
 
@@ -60,7 +61,7 @@ class CategroyController extends Controller
      */
     public function update(categoryStoreRequest $request, Category $category)
     {
-        $category->update($request->validated());
+        $category->update($request->validated() + ['slug' => Str::slug(request()->name)]);
         return redirect('/category')->with('status', config('alert.category.update'));
     }
 

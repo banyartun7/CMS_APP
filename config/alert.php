@@ -11,5 +11,11 @@ return [
         'create' => "Post created successfully",
         'update' => "Post updated successfully",
         'delete' => "Post removed successfully"
+    ],
+
+    "tag" => [
+        'create' => "Tag created successfully",
+        'update' => "Tag updated successfully",
+        'delete' => "Tag removed successfully"
     ]
 ];

@@ -6,12 +6,17 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\postStoreRequest;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $posts = Post::orderBy('id','desc')->get();
@@ -38,16 +43,16 @@ class PostController extends Controller
         }
         
 
-        Post::create($request->validated() + ['featured' => empty($imageName) ? null : $imageName]);
+        Post::create($request->validated() + ['featured' => empty($imageName) ? null : $imageName, 'slug' => Str::slug(request()->title)]);
         return redirect('/post')->with('status',config('alert.post.create'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+        return view('admin.post_show',compact('post'));
     }
 
     /**
@@ -68,7 +73,7 @@ class PostController extends Controller
             $imageName = date('YmdHis') . "." . request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images'), $imageName);
         }
-        $post->update($request->validated() + ['featured' => empty(request()->image) ? $post->featured : $imageName]);
+        $post->update($request->validated() + ['featured' => empty(request()->image) ? $post->featured : $imageName,'slug' => Str::slug(request()->title)]);
         return redirect('/post')->with('status',config('alert.post.update'));
     }
 

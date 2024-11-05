@@ -9,6 +9,7 @@
                     {{ session('status') }}
                 </div>
             @endif
+            <a class="btn btn-warning mb-2 text-white" href="/post">Back</a>
             <form action="{{ route('post.update', $post->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -22,8 +23,7 @@
                 </div>
                 <div class="form-group">
                     <label class="mb-2">Content</label>
-                    <input type="text" class="form-control mb-2" name="content"
-                        value="{{ old('content', $post->content) }}" placeholder="Enter post description...">
+                    <textarea class="form-control mb-2" name="content" placeholder="Enter post description...">{{ old('content', $post->content) }}</textarea>
                     @error('content')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

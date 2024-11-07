@@ -22,6 +22,19 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <p>Choose Tags</p>
+                    @foreach ($tags as $tag)
+                        <label class="mb-2">
+                            {{ $tag->name }}
+                        </label>
+                        <input class="mb-3" type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                            @foreach ($post->tags as $id_tag)
+                        @if ($id_tag->id == $tag->id)
+                            {{ 'checked' }}
+                        @endif @endforeach>
+                    @endforeach
+                </div>
+                <div class="form-group">
                     <label class="mb-2">Content</label>
                     <textarea class="form-control mb-2" name="content" placeholder="Enter post description...">{{ old('content', $post->content) }}</textarea>
                     @error('content')
@@ -33,7 +46,8 @@
                     <select class="form-control mb-2" name="category_id">
                         <option value="">Select category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                            <option value="{{ $category->id }}"
+                                {{ $post->category_id == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}</option>
                         @endforeach
                     </select>

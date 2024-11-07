@@ -15,7 +15,12 @@
             <p>Title : {{ $post->title }}</p>
             <p>Content : {{ $post->content }}</p>
             <p>Category : <i>{{ $post->category->name }}</i></p>
-            <img src="{{ url('/images/' . $post->featured) }}" style="width:150px;height:130px;">
+            <img src="{{ url('/images/' . $post->featured) }}" style="width:150px;height:130px;"><br><br>
+            @foreach ($post->tags as $tag)
+                <div class="badge {{ $tag->id == 1 ? 'text-bg-primary' : 'text-bg-warning' }} text-white"
+                    style="width:55px">{{ $tag->name }}</div>
+            @endforeach
+
         </div>
     </div>
 @endsection

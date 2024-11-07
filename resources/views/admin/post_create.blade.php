@@ -21,6 +21,17 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <p>Choose Tags</p>
+                    @foreach ($tags as $tag)
+                        <label class="mb-2">
+                            {{ $tag->name }}
+                        </label>
+                        <input class="mb-3" type="checkbox" name="tags[]" value="{{ $tag->id }}">
+                    @endforeach
+                </div>
+
+
+                <div class="form-group">
                     <label class="mb-2">Content</label>
                     <textarea class="form-control mb-2" name="content" placeholder="Enter post description...">{{ old('content') }}</textarea>
                     @error('content')

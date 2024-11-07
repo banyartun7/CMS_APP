@@ -16,7 +16,7 @@ class Post extends Model
 
     public function tags(): BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'post_tag', 'post_id', 'tag_id');
+        return $this->belongsToMany(Tag::class,'post_tag','post_id','tag_id');
     }
 
     protected $table = 'posts';

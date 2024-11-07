@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Requests\postStoreRequest;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -29,7 +30,8 @@ class PostController extends Controller
     public function create()
     {
        $categories = Category::all();
-       return view('admin.post_create',compact('categories'));
+       $tags = Tag::all();
+       return view('admin.post_create',compact('categories','tags'));
     }
 
     /**
@@ -41,9 +43,9 @@ class PostController extends Controller
             $imageName = date('YmdHis') . "." . request()->image->getClientOriginalExtension();
             request()->image->move(public_path('images'), $imageName);
         }
-        
-
-        Post::create($request->validated() + ['featured' => empty($imageName) ? null : $imageName, 'slug' => Str::slug(request()->title)]);
+       
+        $post = Post::create($request->validated() + ['featured' => empty($imageName) ? null : $imageName, 'slug' => Str::slug(request()->title)]);
+        $post->tags()->attach($request->tags);
         return redirect('/post')->with('status',config('alert.post.create'));
     }
 
@@ -61,7 +63,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.post_edit',compact('post','categories'));
+        $tags = Tag::all();
+        return view('admin.post_edit',compact('post','categories','tags'));
     }
 
     /**
@@ -74,6 +77,7 @@ class PostController extends Controller
             request()->image->move(public_path('images'), $imageName);
         }
         $post->update($request->validated() + ['featured' => empty(request()->image) ? $post->featured : $imageName,'slug' => Str::slug(request()->title)]);
+        $post->tags()->sync($request->tags);
         return redirect('/post')->with('status',config('alert.post.update'));
     }
 

@@ -99,7 +99,7 @@
                                     href="/tag">Tag</a>
                             </li>
                             <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
-                                    href="#">User</a>
+                                    href="/user">User</a>
                             </li>
                             <li class="p-3 list-group-item">
                                 <form action="/logout" method="POST">

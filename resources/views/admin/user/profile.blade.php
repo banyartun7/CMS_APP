@@ -10,19 +10,24 @@
                 </div>
             @endif
             <a href="/post/create" class="btn btn-info text-white mb-3">Back</a>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="/profile/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
                 <div class="form-group mb-2">
                     <label class="mb-2">Name</label>
-                    <input class="form-control" type="text" placeholder="Enter Name" name="name"
+                    <input class="form-control mb-2" type="text" placeholder="Enter Name" name="name"
                         value="{{ old('name', $user->name) }}">
+                    @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-2">
                     <label class="mb-2">Email</label>
-                    <input class="form-control" type="email" placeholder="Enter Email" name="email"
+                    <input class="form-control mb-2" type="email" placeholder="Enter Email" name="email"
                         value="{{ old('email', $user->email) }}">
+                    @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-group mb-2">
@@ -45,7 +50,10 @@
 
                 <div class="form-group mb-2">
                     <label class="mb-2">About</label>
-                    <textarea class="form-control" name="about">{{ old('about', $user->profiles->about) }}</textarea>
+                    <textarea class="form-control mb-2" name="about">{{ old('about', $user->profiles->about) }}</textarea>
+                    @error('about')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button class="btn btn-warning text-white" type="submit">Update</button>
             </form>

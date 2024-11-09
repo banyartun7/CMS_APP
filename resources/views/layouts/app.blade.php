@@ -87,7 +87,8 @@
                             <li class="list-group-item bg-info text-white p-3">Control Panel</li>
                             <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
                                     href="#">Dashboard</a></li>
-                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info" href="#">My
+                            <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
+                                    href="/profile/{{ Auth::user()->id }}/edit">My
                                     Profile</a></li>
                             <li class="p-3 list-group-item"><a class="text-decoration-none link-info"
                                     href="/post">Posts</a>

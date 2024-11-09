@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function profile($id){
+        //dd(User::findorFail($id)->profiles->profile_img);
+        $user = User::findorFail($id);
+        return view('admin.user.profile',compact('user'));
     }
 }

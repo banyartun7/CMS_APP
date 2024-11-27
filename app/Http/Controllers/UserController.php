@@ -34,4 +34,11 @@ class UserController extends Controller
         
         return redirect('/user')->with('status',"User created successfully!");
     }
+
+    public function roleEdit($permission,$user_id){
+        User::where('id',$user_id)->update([
+            'is_admin' => $permission
+        ]);
+        return redirect('/user')->with('status',"User permission set successfully!");
+    }
 }

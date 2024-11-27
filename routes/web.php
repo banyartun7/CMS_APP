@@ -26,3 +26,4 @@ Route::post('/profile/{id}', [HomeController::class, 'update']);
 Route::get('/user', [UserController::class, 'index']);
 Route::get('/user/add', [UserController::class, 'create'])->name('user.created');
 Route::post('/user/store', [UserController::class, 'store'])->name('user.stored');
+Route::get('/user/{role}/{user_id}', [UserController::class, 'roleEdit'])->name('user.role.edit');

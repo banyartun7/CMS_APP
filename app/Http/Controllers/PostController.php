@@ -14,9 +14,9 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function __construct(){
-        $this->middleware('auth');
-    }
+    // public function __construct(){
+    //     $this->middleware('auth');
+    // }
 
     public function index()
     {
@@ -88,5 +88,11 @@ class PostController extends Controller
     {
         $post->delete();
         return redirect('/post')->with('status',config('alert.post.delete'));
+    }
+
+    public function postByTag($slug){
+       $tags = Tag::where('slug',$slug)->first();
+       $posts = $tags->posts;
+       return view('index',compact('posts'));
     }
 }

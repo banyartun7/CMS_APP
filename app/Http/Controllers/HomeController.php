@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -12,11 +15,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
+   
     /**
      * Show the application dashboard.
      *
@@ -24,7 +23,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $posts = Post::orderBy('id','DESC')->get();
+        return view('index',compact('posts'));
+    }
+
+    public function detail($slug)
+    {
+        $randoms = Post::all()->random(3);
+        $shows = Post::where('slug',$slug)->first();
+        $tags = Tag::all();
+        return view('postDetail',compact('shows','randoms','tags'));
     }
 
     public function profile($id){
